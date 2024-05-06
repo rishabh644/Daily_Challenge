@@ -1,0 +1,52 @@
+Remove Node from Linked List have value lesser than any node on its right.
+
+class Solution {
+public:
+    ListNode* removeNodes(ListNode* head) {
+        
+
+        if(head==NULL)
+        return head;
+
+        ListNode* prev=NULL;
+        ListNode* next;
+        ListNode* curr;
+       
+        curr=head;
+       
+
+        while(curr!=NULL){
+         
+        next=curr->next;
+
+        while(next!=NULL)
+        {
+
+            if( (next->val)>curr->val)
+            {
+                if(head==curr)
+                {
+                    head=curr->next;
+                }
+                else
+                {
+                    prev->next=curr->next;
+                }
+
+                break;
+            }
+            next=next->next;
+        }
+        if(next==NULL)
+        {            
+            prev=curr;
+        }
+        curr=curr->next;
+        
+        }
+      
+       return head;
+
+
+    }
+};
