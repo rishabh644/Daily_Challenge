@@ -1,0 +1,61 @@
+Double element of Linked List 
+
+ListNode* reverseList(ListNode* head,ListNode* prev)
+{
+  
+  if(head==NULL)
+  return head;
+
+  if(head->next==NULL)
+  {
+    head->next=prev;
+    return head;
+  }
+  
+  ListNode* next=head->next;
+  
+  head->next=prev;
+
+  prev=head;
+
+  head=next;
+
+  return reverseList(head,prev);
+
+
+}
+
+class Solution {
+public:
+    ListNode* doubleIt(ListNode* head) {
+        
+        ListNode* reverseHead=reverseList(head,NULL);
+
+        int carry=0,sum=0;
+        ListNode* prev;
+        ListNode* curr;
+
+        curr=reverseHead;
+
+        while(curr!=NULL)
+        {
+            sum=(2*(curr->val)+carry);
+            curr->val=sum%10;
+            carry=sum/10;
+            prev=curr;
+            curr=curr->next;
+        }
+
+        if(carry!=0)
+        {
+            prev->next=new ListNode(carry);
+        }
+        
+        head=reverseList(reverseHead,NULL);
+
+        return head;
+        
+
+
+    }
+};

@@ -1,5 +1,8 @@
 Remove Node from Linked List have value lesser than any node on its right.
 
+
+Brute Force Approach ----------
+
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) {
@@ -47,6 +50,77 @@ public:
       
        return head;
 
+
+    }
+};
+
+Optimized Approach ------
+
+class Solution {
+public:
+    ListNode* removeNodes(ListNode* head)
+    {
+    
+     ListNode* reverseHead=reverseLinkedList(head,NULL);
+     int size=0;
+     ListNode* trv;
+     trv=reverseHead;
+     while(trv!=NULL)
+     {
+        size+=1;
+        trv=trv->next;
+     }
+     vector<int>maxatright(size,-1);
+     trv=reverseHead;
+     int curmax=-1;
+     int i=size-1;
+     while(trv!=NULL)
+     {  
+        maxatright[i]=curmax;
+        if((trv->val)>curmax)
+        {
+              curmax=trv->val;
+        }
+
+        trv=trv->next;
+        i-=1;
+     }
+     
+    head=reverseLinkedList(reverseHead,NULL);
+    
+    trv=head;
+    i=0;
+    ListNode *prev=head;
+
+    while(trv!=NULL)
+    {
+       if((trv->val)<maxatright[i])
+       {
+          if(head==trv)
+          {
+
+          head=trv->next;
+          prev=head;
+
+          }
+          else
+          {
+            prev->next=trv->next;
+          }
+       }
+
+       if(prev->next==trv)
+       prev=trv;
+       
+       trv=trv->next;
+       i++;
+
+    }
+
+
+    
+    return head;
+    
 
     }
 };
