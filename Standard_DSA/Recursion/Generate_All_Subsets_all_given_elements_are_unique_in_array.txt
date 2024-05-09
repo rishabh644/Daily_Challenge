@@ -1,0 +1,32 @@
+void mygeneratesubset(vector<int>& nums,vector<vector<int>>&ans,vector<int>temp,int i)
+{       
+        if(i==nums.size())
+        {
+        ans.push_back(temp);
+        return;
+        }
+
+         mygeneratesubset(nums,ans,temp,i+1);
+         temp.push_back(nums[i]);
+         mygeneratesubset(nums,ans,temp,i+1);    
+
+}
+
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        
+         vector<vector<int>>ans;
+
+         vector<int>temp;
+         
+         int i=0;
+         mygeneratesubset(nums,ans,temp,i+1);
+         temp.push_back(nums[i]);
+         mygeneratesubset(nums,ans,temp,i+1);
+
+
+         return ans;
+
+    }
+};
