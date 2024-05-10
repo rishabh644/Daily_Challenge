@@ -1,0 +1,17 @@
+Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n].
+
+You may return the answer in any order.
+
+    vector<vector<int>> combine(int n, int k) {
+
+      vector<vector<int>>ans;
+
+      vector<int>temp;
+
+      int i=1;
+
+      all_combination(ans,temp,i,k,n);   
+     
+      return ans;
+
+    }
