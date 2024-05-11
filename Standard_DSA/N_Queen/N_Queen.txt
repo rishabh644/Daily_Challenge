@@ -1,0 +1,80 @@
+bool isSafe(vector<string>&grid,int r,int j)
+{     int rw,cl;
+      //check column
+
+      for(rw=0;rw<r;rw++)
+      {
+        if(grid[rw][j]=='Q')
+        return false;
+      }
+      rw=r-1,cl=j-1;
+
+      while(rw>=0 && cl>=0)
+      {
+        if(grid[rw][cl]=='Q')
+        return false;
+        rw-=1;
+        cl-=1;
+      }
+      rw=r-1;
+      cl=j+1;
+      while(rw>=0 && cl<grid[0].size())
+      {
+          if(grid[rw][cl]=='Q')
+           return false;
+
+           rw-=1;
+           cl+=1;
+
+      }
+
+      return true;
+  
+}
+
+void mysolveNqueen(vector<vector<string>>&ans,vector<string>grid,int r,int n)
+{
+     
+
+   for(int k=0;k<n;k++)
+   {
+      grid[r][k]='Q';
+      if(isSafe(grid,r,k))
+      {
+        if(r==n-1)
+        {
+            ans.push_back(grid);
+        }
+        else
+        {
+            mysolveNqueen(ans,grid,r+1,n);
+        }
+      }
+      grid[r][k]='.'; 
+      
+   }
+
+}
+
+class Solution {
+public:
+    vector<vector<string>> solveNQueens(int n) {
+
+     vector<vector<string>>ans;   
+     vector<string>grid;
+     string temp="";
+     int i;
+     for(i=0;i<n;i++)
+     {
+        temp+=".";
+     }
+     for(i=0;i<n;i++)
+     {
+        grid.push_back(temp);
+     }
+     mysolveNqueen(ans,grid,0,n);
+
+      return ans;
+
+    }
+};

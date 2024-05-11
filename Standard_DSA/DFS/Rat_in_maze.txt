@@ -1,0 +1,58 @@
+void dfs(vector<vector<int>> &m,vector<vector<bool>>&visited,vector<string>&ans,string mov,int i,int j,int n)
+{
+    
+    if(i<0 || j<0 || i>=n || j>=n || visited[i][j]==true || m[i][j]==0)
+    return;
+    
+    if(i==n-1 && j==n-1)
+    {
+        ans.push_back(mov);
+        return;
+    }
+    
+    visited[i][j]=true;
+    
+    //up
+    dfs(m,visited,ans,mov+'U',i-1,j,n);
+    
+    
+    //down
+    dfs(m,visited,ans,mov+'D',i+1,j,n);
+    
+    //left
+    dfs(m,visited,ans,mov+'L',i,j-1,n);
+    
+    //right
+    dfs(m,visited,ans,mov+'R',i,j+1,n);
+    
+    visited[i][j]=false;
+    
+    return;
+    
+}
+
+
+
+class Solution{
+    public:
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        
+        
+        vector<string>ans;
+        
+        vector<vector<bool>>vis(n,vector<bool>(n,false));
+        
+        string mov="";
+        
+        int i,j;
+        
+        dfs(m,vis,ans,mov,0,0,n);
+        
+        return ans;
+        
+        
+        
+        
+    }
+};

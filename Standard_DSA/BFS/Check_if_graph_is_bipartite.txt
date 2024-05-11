@@ -1,0 +1,65 @@
+bool bfs(vector<int>adj[],vector<vector<int>>&vis,int v,int V)
+{
+    
+    vis[v]={1,0};
+    
+    int ver;
+    
+    queue<int>qu;
+    
+    qu.push(v);
+    
+    
+    while(!qu.empty())
+    {
+        
+        ver=qu.front();
+        qu.pop();
+        
+        for(int adjv:adj[ver])
+        {
+            if(vis[adjv][0]==1 && vis[adjv][1]==vis[ver][1])
+            return false;
+            if(vis[adjv][0]==0)
+            {   vis[adjv][0]=1;
+                vis[adjv][1]=(vis[ver][1]+1)%2;
+                qu.push(adjv);
+            }
+        }
+        
+    }
+    
+    return true;
+    
+}
+
+
+class Solution {
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    // Code here
+	    
+	   // vector<int>vis(V,0);
+	    
+	    vector<vector<int>>vis(V,{0,0});
+	    
+	    
+	    for(int v=0;v<V;v++)
+	    {
+	       
+	       if(vis[v][0]==0)
+	       {
+	           if(!bfs(adj,vis,v,V))
+	           return false;
+	       }
+	       
+	    }
+	    
+	    return true;
+	    
+	    
+	    
+	    
+	}
+
+};
