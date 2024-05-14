@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        return __builtin_popcount(start^goal);
+    }
+};
+
+
+int count_set_bits(int flips)
+{
+    int count=0;
+
+    while(flips)
+    {
+        if(flips&1)
+        count++;
+
+        flips>>=1;
+    }
+    
+    return count;
+
+}
+
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        
+        int flips=start^goal;
+
+        return count_set_bits(flips);
+
+
+    }
+};
