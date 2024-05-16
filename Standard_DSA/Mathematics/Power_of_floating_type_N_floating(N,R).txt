@@ -1,0 +1,40 @@
+class Solution {
+public:
+    double myPow(double x, long long int n) {
+        
+
+
+      double ans=1;
+
+      double prod;
+
+      if(n==0)
+      return 1.0;
+      else if(n<0)
+      {
+        prod=(1.0/x);
+        n=-1*n;
+      }
+      else
+      {
+        prod=x;
+      }
+      
+
+      while(n)
+      {
+          if(n&1)
+          {
+            ans=ans*prod;
+          }
+
+          prod=prod*prod;
+
+          n>>=1;
+
+      }
+
+      return ans;
+
+    }
+};

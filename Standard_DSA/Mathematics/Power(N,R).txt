@@ -1,0 +1,35 @@
+#define mod 1000000007
+
+X^N=X^(2+2^2+2^3+2^4)
+
+i.e (X^2)*(X^(2^2))*(X^(2^3))
+
+class Solution{
+    public:
+    //You need to complete this fucntion
+    
+    long long power(int N,int R)
+    {
+       //Your code here
+        
+        
+        long long ans=1;
+        
+        long long prod=N;
+        
+        while(R)
+        {
+            if(R&1)
+            {
+                ans=((ans%mod)*(prod%mod))%mod;
+            }
+            prod=((prod%mod)*(prod%mod))%mod;
+            
+            R>>=1;
+            
+        }
+        
+        return ans;
+    }
+
+};

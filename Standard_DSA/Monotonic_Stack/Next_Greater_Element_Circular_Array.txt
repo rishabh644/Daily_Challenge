@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        stack<int>st;
+        int i;
+        int n=nums.size();
+
+        vector<int>ans(n,-1); 
+        
+        i=0;
+
+        while(i<n)
+        {
+
+            while(!st.empty() && nums[st.top()]<nums[i])
+            {
+                ans[st.top()]=nums[i];
+                st.pop();
+            }
+            
+
+            st.push(i);
+
+            i++;
+        }
+        i=0;
+
+        while(i<n)
+        {
+
+            while(!st.empty() && nums[st.top()]<nums[i])
+            {
+                ans[st.top()]=nums[i];
+                st.pop();
+            }
+            
+            if(st.empty() || st.top()==i)
+            break;
+
+            i++;
+        }
+
+        return ans;      
+
+    }
+};

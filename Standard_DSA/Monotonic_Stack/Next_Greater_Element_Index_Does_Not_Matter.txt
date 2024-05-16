@@ -1,0 +1,24 @@
+vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+
+       vector<int>ans;
+       
+       set<int>st(nums2.begin(),nums2.end());
+
+       for(auto v:nums1)
+       {
+         
+         auto it=st.upper_bound(v);
+         if(it==st.end())
+         {
+            ans.push_back(-1);
+         }
+         else
+         {
+            ans.push_back(*it);
+         }
+         
+       }
+
+       return ans;
+
+    }

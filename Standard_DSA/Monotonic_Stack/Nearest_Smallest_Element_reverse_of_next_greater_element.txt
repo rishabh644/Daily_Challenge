@@ -1,0 +1,24 @@
+vector<int> Solution::prevSmaller(vector<int> &A) {
+    
+    int i,n=A.size();
+    vector<int>next_small(n,-1);
+    
+    stack<int>st;
+    i=n-1;
+    
+    while(i>=0)
+    {
+        while(!st.empty() && A[i]<A[st.top()])
+        {
+            next_small[st.top()]=A[i];
+            st.pop();
+        }
+        
+        st.push(i);
+        i-=1;
+    }
+    
+    return next_small;
+    
+    
+}

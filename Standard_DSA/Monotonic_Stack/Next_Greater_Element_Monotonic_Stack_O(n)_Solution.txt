@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+
+       unordered_map<int,int>ump;
+
+       stack<int>st;
+
+       vector<int>ans;
+       
+       for(auto vl:nums2)
+       {
+            while(!st.empty() && st.top()<vl)
+            {
+                ump[st.top()]=vl;
+                st.pop();
+            }
+            st.push(vl);
+       }
+
+       for(auto vl:nums1)
+       {
+   
+             if(ump[vl]==0)
+             ans.push_back(-1);
+             else
+             ans.push_back(ump[vl]);
+       }
+
+       return ans;
+
+
+
+
+       
+    }
+};

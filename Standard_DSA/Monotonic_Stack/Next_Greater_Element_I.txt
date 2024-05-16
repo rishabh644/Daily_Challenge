@@ -1,0 +1,55 @@
+int next_greater(int vl,vector<int>&nums2)
+{
+ 
+   int n=nums2.size();
+
+   int i;
+
+   for(i=0;i<n;i++)
+   {
+       if(nums2[i]==vl)
+       break;
+   }
+   while(i<n)
+   {
+       if(nums2[i]>vl)
+       return nums2[i];
+
+       i+=1;
+   }
+  
+   return -1;
+
+}
+
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+
+       unordered_map<int,int>ump;
+
+       stack<int>st;
+
+       vector<int>ans;
+
+       for(int num:nums2)
+       {
+           while(!st.empty() && st.top()<num )
+           {
+               ump[st.top()]=num;
+               st.pop();
+           }
+           st.push(num);
+       }        
+      
+       for(int num:nums1)
+       {
+           if(ump[num]!=0)
+           ans.push_back(ump[num]);
+           else
+           ans.push_back(-1);
+       }
+         
+       return ans;
+    }
+};
