@@ -1,0 +1,27 @@
+pair<int,int> myisBalanced(TreeNode* root)
+{
+     if(root==NULL)
+     return {0,true};
+
+     auto pr1=myisBalanced(root->left);
+     auto pr2=myisBalanced(root->right);
+    
+     pair<int,int>pr;
+
+     pr={1+max(pr1.first,pr2.first),pr1.second&pr2.second & abs(pr1.first-pr2.first)<=1};
+
+     return pr;
+
+}
+
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        
+      auto pr=myisBalanced(root);
+
+      return pr.second;
+
+
+    }
+};

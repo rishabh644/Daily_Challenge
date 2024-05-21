@@ -1,0 +1,44 @@
+bool non_repeating(string s)
+{
+    unordered_map<char,int>ump;
+
+    for(char ch:s)
+    {
+        if(ump[ch]!=0)
+        {
+            return false;
+        }
+        ump[ch]++;
+       
+    }
+
+    return true;
+}
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        int ans=0;
+        int i,j;
+        int n=s.size();
+        string st="";
+        for(i=0;i<n;i++)
+        {   st="";
+            for(j=i;j<n;j++)
+            {
+               st=st+s[j];
+               if(non_repeating(st))
+               {
+                ans=max(j-i+1,ans);
+               }
+               else
+               break;
+            }
+        }
+
+        return ans;   
+
+    }
+};

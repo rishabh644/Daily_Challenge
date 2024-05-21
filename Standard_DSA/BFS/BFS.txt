@@ -1,0 +1,55 @@
+void bfs(vector<int>adj[],vector<int>&visited,int v,vector<int>ans)
+{
+    queue<int>qu;
+    visited[v]=1;
+    qu.push(v);
+    
+    int vv;
+    
+    while(!qu.empty())
+    {
+        vv=qu.front();
+        
+        
+        qu.pop();
+        
+        cout<<vv<<" ";
+        
+        for(auto adjv:adj[vv])
+        {
+           
+           if(visited[adjv]==0)
+           {   
+               visited[adjv]=1;
+               qu.push(adjv);
+           }
+           
+        }
+        
+    }
+    
+    
+    return;
+}
+
+class Solution {
+  public:
+    // Function to return Breadth First Traversal of given graph.
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+        
+        
+        
+        vector<int>visited(V,0);
+        
+        int i;
+        
+        vector<int>ans;
+        
+        bfs(adj,visited,0,ans);
+        
+        return ans;
+        
+        
+                                                        }
+};

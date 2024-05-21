@@ -1,0 +1,26 @@
+void rightsideview(TreeNode* root,vector<int>&ans,int d)
+{
+   if(root==NULL)
+   return; 
+
+   if(ans.size()==d)
+   {
+       ans.push_back(root->val);
+   }
+
+   rightsideview(root->right,ans,d+1);
+   rightsideview(root->left,ans,d+1);
+
+}
+    vector<int> rightSideView(TreeNode* root) {
+        
+          vector<int>ans;
+          
+          if(root==NULL)
+          return ans;
+          int h=0;
+
+          rightsideview(root,ans,h);
+         
+          return ans;
+    }

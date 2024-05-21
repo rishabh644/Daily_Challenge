@@ -1,0 +1,80 @@
+vector<vector<int>>mov={{0,1},{0,-1},{-1,0},{1,0}};
+
+void bfs(queue<pair<pair<int,int>,int>>&qu,vector<vector<int>>& grid,vector<vector<int>>&cost)
+{   
+    int m=grid.size();
+    int n=grid[0].size();
+    pair<pair<int,int>,int>pr;
+
+    int x,y,xx,yy;
+    int d;
+
+    while(!qu.empty())
+    {
+        pr=qu.front();
+        qu.pop();
+        x=pr.first.first;
+        y=pr.first.second;
+        d=pr.second;
+
+        for(auto mv:mov)
+        {
+            xx=x+mv[0];
+            yy=y+mv[1];
+
+            if(xx>=0 && xx<m && yy>=0 && yy<n && grid[xx][yy]==1)
+            {
+                grid[xx][yy]=2;
+                cost[xx][yy]=min(cost[xx][yy],d+1);
+                qu.push({{xx,yy},d+1});
+            }
+        }
+
+    }
+}
+
+
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        
+
+    int m=grid.size();
+    int n=grid[0].size();
+    int i,j;
+    int ans=-1;
+    
+    vector<vector<int>>cost(m,vector<int>(n,INT_MAX));  
+    queue<pair<pair<int,int>,int>>qu;      
+    for(i=0;i<m;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            if(grid[i][j]==2)
+            {   
+                cost[i][j]=0;
+                qu.push({{i,j},0});
+            }
+            if(grid[i][j]==0)
+            cost[i][j]=0;
+
+        }
+    }
+    
+    bfs(qu,grid,cost);
+
+    for(i=0;i<m;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            if(grid[i][j]==1 && cost[i][j]==INT_MAX)
+            return -1;
+            else 
+            ans=max(ans,cost[i][j]);   
+        }
+    }
+    
+    return ans;
+    
+    }
+};

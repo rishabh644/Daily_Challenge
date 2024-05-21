@@ -1,0 +1,42 @@
+void MyStack ::push(int x) 
+{
+    // Your Code
+    if(top==NULL)
+    {
+        StackNode* newNode=new StackNode(x);
+        top=newNode;
+    }
+    else
+    {
+        StackNode* newNode=new StackNode(x);
+        newNode->next=top;
+        top=newNode;
+        
+    }
+    
+    
+}
+
+//Function to remove an item from top of the stack.
+int MyStack ::pop() 
+{
+    // Your Code
+    if(top==NULL)
+    {
+        
+
+
+        return -1;
+        
+    }
+    else
+    {
+        StackNode *temp=top->next;
+        int val=top->data;
+        top=temp;
+        return val;
+        
+    }
+    
+    
+}

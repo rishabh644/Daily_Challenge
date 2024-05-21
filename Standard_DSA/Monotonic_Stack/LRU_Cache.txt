@@ -1,0 +1,84 @@
+class LRUCache {
+private:
+struct ListNode{
+    int val;
+    int key;
+    ListNode *next;
+    ListNode *prev;
+    ListNode():key(0),val(0),next(NULL),prev(NULL){};
+    ListNode(int k,int v): key(k),val(v),next(NULL),prev(NULL){};
+
+};
+
+ListNode *head;
+ListNode *tail;
+int capacity;
+int crsz;
+unordered_map<int,ListNode*>ump;
+
+public:
+    LRUCache(int capacity) {
+      
+         this->capacity=capacity;
+         crsz=0;
+         head=new ListNode(0,0);
+         tail=new ListNode(0,0);
+         head->next=tail;
+         tail->prev=head;
+    
+                           }
+    void insert_after_head(ListNode *temp)
+    {
+        head->next->prev=temp;
+        temp->next=head->next;
+        head->next=temp;
+        temp->prev=head;
+    }
+    int get(int key) {
+        if(ump.find(key)==ump.end())
+        return -1;
+        ListNode *temp;
+        temp=ump[key];
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+        insert_after_head(temp);
+        return temp->val;
+    }
+    
+    void put(int key, int value) {
+        if(ump.find(key)!=ump.end())
+        {
+             ump[key]->val=value;
+             ListNode *temp=ump[key];
+             temp->prev->next=temp->next;
+             temp->next->prev=temp->prev;
+             insert_after_head(temp);
+        }
+        else if(crsz<capacity)
+        {
+            crsz++;
+            ListNode *temp=new ListNode(key,value);
+            ump[key]=temp;
+            insert_after_head(temp);
+        }
+        else
+        {    ump.erase(tail->prev->key);
+             tail->prev->prev->next=tail;
+             tail->prev=tail->prev->prev;
+             ListNode *temp=new ListNode(key,value);
+             
+             ump[key]=temp;
+             insert_after_head(temp);
+
+        }
+
+
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */

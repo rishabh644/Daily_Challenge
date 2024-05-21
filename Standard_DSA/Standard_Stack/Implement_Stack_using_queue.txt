@@ -1,0 +1,32 @@
+class MyStack:
+
+    def __init__(self):
+        self.qu1=deque()
+        self.qu2=deque()
+        
+
+    def push(self, x: int) -> None:
+        self.qu2.append(x)
+
+        while len(self.qu1)!=0:
+            self.qu2.append(self.qu1.popleft())
+        
+        self.qu2,self.qu1=self.qu1,self.qu2
+
+
+    def pop(self) -> int:
+        if(len(self.qu1)!=0):
+            return self.qu1.popleft()
+
+    def top(self) -> int:
+          if(len(self.qu1)!=0):
+            return self.qu1[0]
+        
+
+    def empty(self) -> bool:
+        if(len(self.qu1)==0):
+            return True
+        else:
+            return False
+        
+

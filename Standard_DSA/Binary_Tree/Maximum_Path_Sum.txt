@@ -1,0 +1,30 @@
+int mymaxPathSum(TreeNode* root,int& mxsum)
+{
+     if(root==NULL)
+     return 0;
+
+     int lm=mymaxPathSum(root->left,mxsum);
+
+     int rm=mymaxPathSum(root->right,mxsum);
+
+     mxsum=max(mxsum,lm+rm+root->val);
+
+     return max(max(root->val+lm,root->val+rm),0);
+
+}
+
+class Solution {
+public:
+    int maxPathSum(TreeNode* root) {
+        
+        int mxsum=INT_MIN;
+
+        mymaxPathSum(root,mxsum);
+
+       return mxsum;
+     
+
+         
+
+    }
+};

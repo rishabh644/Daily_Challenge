@@ -1,0 +1,67 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+int precedence(char op) {
+    if (op == '+' || op == '-') {
+        return 1;
+    }
+    if (op == '*' || op == '/') {
+        return 2;
+    }
+    if (op == '^') {
+        return 3;
+    }
+    return 0;
+}
+
+bool isLeftAssociative(char op) {
+    if (op == '^') {
+        return false; // Right associative
+    }
+    return true; // Left associative for +, -, *, /
+}
+
+string infixToPostfix(string s) {
+    string ans = "";
+    stack<char> st;
+
+    st.push('('); // Add a starting '(' to simplify logic
+    s += ')';     // Add a trailing ')' to process the entire expression
+
+    for (auto ch : s) {
+        if (isalpha(ch)) {
+            ans += ch;
+        } else if (ch == '(') {
+            st.push(ch);
+        } else if (ch == ')') {
+            while (!st.empty() && st.top() != '(') {
+                ans += st.top();
+                st.pop();
+            }
+            if (!st.empty()) {
+                st.pop(); // Pop the '('
+            }
+        } else {
+            // Operator encountered
+            while (!st.empty() && precedence(st.top()) > precedence(ch)) {
+                ans += st.top();
+                st.pop();
+            }
+            while (!st.empty() && precedence(st.top()) == precedence(ch) && isLeftAssociative(ch)) {
+                ans += st.top();
+                st.pop();
+            }
+            st.push(ch);
+        }
+    }
+
+    return ans;
+}
+
+int main() {
+    string infix = "a+b*(c^d-e)^(f+g*h)-i";
+    cout << "Postfix: " << infixToPostfix(infix) << endl;
+    return 0;
+}

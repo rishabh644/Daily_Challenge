@@ -1,0 +1,99 @@
+long long  sumSubarrayMins(vector<int>& arr) {
+    
+      stack<pair<int,int>>in_stk_p;
+
+      stack<pair<int,int>>in_stk_n;
+    
+
+      vector<int>left(arr.size());
+      vector<int>right(arr.size());
+
+      //initialize
+
+      for(int i=0;i<arr.size();i++)
+      left[i]=i+1;
+
+      for(int i=0;i<arr.size();i++)
+      right[i]=arr.size()-i;
+
+      for(int i = 0; i < arr.size(); i++){
+      // for previous less
+      while(!in_stk_p.empty() && in_stk_p.top().first > arr[i]) in_stk_p.pop();
+      left[i] = in_stk_p.empty()? i + 1: i - in_stk_p.top().second;
+      in_stk_p.push({arr[i],i});
+			
+      // for next less
+      while(!in_stk_n.empty() && in_stk_n.top().first > arr[i]){
+        auto x = in_stk_n.top();in_stk_n.pop();
+        right[x.second] = i - x.second;
+      }
+      in_stk_n.push({arr[i], i});
+    }
+
+    long long  ans = 0, mod = 1e9 +7;
+    for(int i = 0; i < arr.size(); i++){
+      ans = (ans + (1ll*arr[i])*(left[i]*right[i]));
+    }
+    return ans;
+
+
+    
+    }
+
+long long  sumSubarrayMax(vector<int>& arr) {
+    
+      stack<pair<int,int>>in_stk_p;
+
+      stack<pair<int,int>>in_stk_n;
+    
+
+      vector<int>left(arr.size());
+      vector<int>right(arr.size());
+
+      //initialize
+
+      for(int i=0;i<arr.size();i++)
+      left[i]=i+1;
+
+      for(int i=0;i<arr.size();i++)
+      right[i]=arr.size()-i;
+
+      for(int i = 0; i < arr.size(); i++){
+      // for previous more
+      while(!in_stk_p.empty() && in_stk_p.top().first < arr[i]) in_stk_p.pop();
+      left[i] = in_stk_p.empty()? i + 1: i - in_stk_p.top().second;
+      in_stk_p.push({arr[i],i});
+			
+      // for next more
+      while(!in_stk_n.empty() && in_stk_n.top().first<arr[i]){
+        auto x = in_stk_n.top();in_stk_n.pop();
+        right[x.second] = i - x.second;
+      }
+      in_stk_n.push({arr[i], i});
+    }
+
+    long long  ans = 0, mod = 1e9 +7;
+    for(int i = 0; i < arr.size(); i++){
+      ans = (ans + (1ll*arr[i])*(left[i]*right[i]));
+    }
+    return ans;
+
+
+    
+}
+
+class Solution {
+public:
+    long long subArrayRanges(vector<int>& nums) {
+        
+      long long summin=sumSubarrayMins(nums);
+
+      long long summax=sumSubarrayMax(nums);
+
+      return summax-summin;
+
+
+
+        
+    }
+};

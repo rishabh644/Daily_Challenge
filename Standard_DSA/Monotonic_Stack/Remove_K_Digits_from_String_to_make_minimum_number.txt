@@ -1,0 +1,64 @@
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+
+
+       stack<int>st;
+
+       int i;
+       int n=num.size();
+       int dgt;
+       int count=0;
+
+       if(n==1 || k==n)
+       return "0";
+
+       i=0;
+
+       while(i<n)
+       {
+        dgt=num[i]-'0';
+        while(count<k && !st.empty() && st.top()>dgt)
+        {
+            st.pop();
+            count++;
+        }
+
+        
+        st.push(dgt);
+        
+
+        i++;
+       }
+       
+
+       while(!st.empty() && count<k)
+       {
+        st.pop();
+        count++;
+       
+       }
+
+       string ans="";
+       while(!st.empty())
+       {
+        ans+=to_string(st.top());
+        st.pop();
+       }
+       reverse(ans.begin(),ans.end());
+       i=0;
+       while(ans[i]=='0')
+       i++;
+
+        if(i!=ans.size())
+        return ans.substr(i);
+        else
+        return "0";
+
+
+
+        return ans;
+      
+
+    }
+};

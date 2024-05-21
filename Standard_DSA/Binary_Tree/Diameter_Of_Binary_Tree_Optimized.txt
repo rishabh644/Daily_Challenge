@@ -1,0 +1,31 @@
+int height(TreeNode* root,int& diameter)
+{
+    if(root==NULL)
+    return 0;
+    
+    int hl=height(root->left,diameter);
+    int hr=height(root->right,diameter);
+
+    diameter=max(diameter,hl+hr);
+
+    return 1+max(hl,hr);
+
+    
+
+}
+
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+
+        if(root==NULL)
+        return 0;
+        
+        int diameter=0;
+
+        height(root,diameter);
+        
+        return diameter;
+
+    }
+};

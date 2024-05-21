@@ -1,0 +1,15 @@
+Advantage of Postfix Expression
+
+1. No Need For Parentheses:
+     * Postfix notation does not require parentheses to dictate operator precedence. The order of operations is entirely determined by the position of the operators and operands.
+
+2. Simple and Efficient Evaluation:
+    *Postfix expressions can be evaluated using a stack in a straightforward manner. Each operand is pushed onto the stack, and when an operator is encountered, the necessary operands are popped from the stack, the operation is performed and the result is pushed back onto the stack.
+
+3. Consistent Left-to-Right Evaluation
+   * In postfix notation, operators are always applied to the most recent operands, ensuring a consistent left-to-right evaluation without need for lookahead or backtracking.
+
+4. Ease of Implementation in Computers:
+   * Many computer algorithms and calculators utilize postfix notation (Reverse Polish Notation) because it simplifies the process of evaluating expression,expecially in the absence of explicit operator precedence rules.
+
+Overall, the use of postfix notaion can lead to more efficient and easier-to-implement algorithms for expression evaluation.

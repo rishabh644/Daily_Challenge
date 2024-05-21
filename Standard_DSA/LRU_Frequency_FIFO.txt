@@ -1,0 +1,53 @@
+When managing caches or other systems with limited resources, selecting the right algorithm for eviction ( deciding which item to remove when space is needed) is crucial. Here are three common algorithm: Least Recently Used(LRU), Least Frequently Used(LFU), and First-In-First-Out(FIFO). 
+
+Each has its own strength and weakness.
+
+Least Recently Used(LRU)
+Algorithm: Removes the least recently accessed item first.
+
+Advantages:
+*Predictive of Future Access: Assumes the items accessed recently are more likely to be accessed again soon, which is often true for many workloads.
+
+*Simplicity in Concept: Easy to understand and implement.
+
+*Good for Temporal Locality: Works well when recent data is more likely to be reused.
+
+Disadvantages:
+ 
+*Implementation Overhead: Requires keeping track of the order of access, which can be complex and resource-intensive(e.g. using a linked list or doubly linked list).
+
+*Costly Updates: Each access may require updating the position of the item in the list, which can be expensive in terms of processing time.
+
+Least Frequently Used(LFU)
+Algorithm: Removes the item with the fewest accesses first.
+Advantages: 
+* Predictive of Low Usage: Assumes items that have been accessed infrequently in the past will not likely not be needed in the future.
+* Good for Frequency-based Pattern: Works well for workloads where items with higher frequency are more important. 
+
+Disadvantages:
+Potential Staleness: Can retain old, frequently accessed items that may no longer be needed, leading to less efficient cache utilization.
+Implementation Complexity: Requires maintaining a count of accessed for each item, which can be resource-intensive.
+Inflexibility: May not adapt well to changes in access patterns where an item suddenly becomes very important.
+
+First-In-First-Out(FIFO)
+Algorithm: Removes the oldest item first, regardless of how often it was accessed.
+
+Advantages:
+Simplicity: Very simple to implement, as it only needs to track the order of item insertion.
+Low Overhead: Minimal computational overhead and memory usage compared to LRU and LFU.
+Predictability: The eviction order is predictable and straightforward.
+Disadvantages:
+No Usage Consideration: Does not consider how often or how recently an item was accessed, which can lead to inefficient caching.
+Poor Performance for Some Workloads: May evict items that are still frequently used, leading to more cache misses.
+
+Choosing the Right Algorithm
+ 
+The choice between LRU,LFU and FIFO depends on the specific use case and workload characteristics:
+
+*LRU: Best for workloads with strong temporal locality where recently accessed items are more likely to be accessed again.
+
+*LFU: Best for workloads with stable access frequencies where frequently accessed items remain important over time.
+
+*FIFO: Suitable for simple, low-overhead applications or workloads where access patterns are random or do not fit well with LRU or LFU assumptions.
+
+In practice, hybrid or adaptive algorithm may also be used, combining elements of these basic strategies to better match the specific requirements of an application. For instance, some systems use a combination of LRU and LFU to balance between recovery and frequency considerations.
