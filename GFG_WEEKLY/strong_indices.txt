@@ -1,0 +1,32 @@
+class Solution {
+  public:
+    int maximumStrongIndices(int n, int x, int y, vector<int> &a, vector<int> &b) {
+        // code here
+        
+        int fi=0;
+        int si=0;
+        
+        int count=0;
+        
+        while(fi<n && si<n)
+        {
+            if((a[fi]-x)<=b[si] && b[si]<=(a[fi]+y))
+            {
+                fi++;
+                si++;
+                count++;
+            }
+            
+            else if((a[fi]-x)>b[si])
+            {
+                si++;
+            }
+            else
+            {
+                fi++;
+            }
+        }
+        
+        return count;
+    }
+};

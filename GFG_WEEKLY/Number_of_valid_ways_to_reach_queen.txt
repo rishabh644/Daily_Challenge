@@ -1,0 +1,70 @@
+void dfs(int ver,int& prev,int& m,int& ans,int& count,vector<int> &isHaunted,vector<vector<int>>&adj_list)
+{   int old_count=count;
+    int old_prev=prev;
+    if(isHaunted[ver-1])
+    {   if(prev)
+        count++;
+        else 
+        count=1;
+        
+        prev=1;
+    }
+    else
+    {
+        prev=0;
+    }
+    
+    if(count>m)
+    {
+        count=old_count;
+        prev=old_prev;
+        return;
+    }
+    else
+    {
+        if(adj_list[ver].size()==0)
+        {
+            ans++;
+            count=old_count;
+            prev=old_prev;
+        }
+        else
+        {
+            for(int i=0;i<adj_list[ver].size();i++)
+            {
+                dfs(adj_list[ver][i],prev,m,ans,count,isHaunted,adj_list);
+            }
+            count=old_count;
+            prev=old_prev;
+        }
+        
+        return;
+    }
+    
+    
+}
+
+class Solution {
+  public:
+    int citiesVisited(int n, int m, vector<int> &isHaunted,
+                      vector<vector<int>> &edges) {
+        // code here
+        
+        vector<vector<int>>adj_list(n+1);
+        
+        for(auto edg:edges)
+        {
+            adj_list[edg[0]].push_back(edg[1]);
+        }
+        
+        int ans=0;
+        int count=0;
+        int prev=0;
+        int limit=m;
+        int ver=1;
+        dfs(ver,prev,limit,ans,count,isHaunted,adj_list);
+        
+        return ans;
+        
+    }
+};
