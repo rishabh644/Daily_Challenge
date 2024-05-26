@@ -1,0 +1,59 @@
+#define mod 1000000007
+
+
+long long int mytopDown(int i,vector<long long int>&ans)
+{
+    
+    if(ans[i]!=-1)
+    return ans[i];
+    
+    if(i==0)
+    return 0;
+    
+    if(i==1)
+    return 1;
+    
+    ans[i]=( mytopDown(i-1,ans)%mod + mytopDown(i-2,ans)%mod )%mod;
+    
+    return ans[i];
+    
+}
+
+class Solution {
+  public:
+    long long int topDown(int n) {
+        // code here
+       vector<long long int>ans(n+1,-1);
+       return mytopDown(n,ans);
+       
+    }
+    long long int bottomUp(int n) {
+        // code here
+        long long int f=0;
+        long long int s=1;
+        
+        if(n==0)
+        return f;
+            
+        if(n==1)
+        return s;
+        
+        int i=2;
+        int temp;
+        
+        while(i<=n)
+        {
+            temp=s;
+            
+            s=((f%mod)+(s%mod))%mod;
+            
+            f=temp;
+            
+            i+=1;
+            
+        }
+        
+        return s;
+        
+                                   }
+};

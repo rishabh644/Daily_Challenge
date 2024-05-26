@@ -1,0 +1,46 @@
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+
+    unordered_set<string>dict(wordList.begin(),wordList.end());
+
+    queue<pair<string,int>>qu;
+
+    pair<string,int>pr;
+
+    qu.push({beginWord,1});
+
+    string word;
+    int dis;
+
+    while(!qu.empty())
+    {
+       pr=qu.front();
+       qu.pop();
+       word=pr.first;
+       dis=pr.second;
+       
+       if(word==endWord)
+       return dis;
+
+       dict.erase(word);
+
+       for(int j=0;j<word.size();j++)
+       {
+           char c=word[j];
+           for(int k=0;k<26;k++)
+           {
+              word[j]='a'+k;
+              if(dict.find(word)!=dict.end())
+              {
+                qu.push({word,dis+1});
+              }
+           }
+           
+           word[j]=c;
+
+       }
+
+    }
+
+    return 0;
+
+    }

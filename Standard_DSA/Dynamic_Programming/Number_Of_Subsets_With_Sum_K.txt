@@ -1,0 +1,32 @@
+#define mod 1000000007
+
+int myperfectSum(int arr[],vector<vector<int>>&dp,int ind,int n,int sum)
+{  
+    if(sum==0 && ind==n)
+    return 1;
+      
+    if(sum<0 || ind==n)
+    return 0;
+    
+    if(dp[sum][ind]!=-1)
+    return dp[sum][ind];
+    
+    dp[sum][ind]=(myperfectSum(arr,dp,ind+1,n,sum)%mod+myperfectSum(arr,dp,ind+1,n,sum-arr[ind])%mod)%mod;
+    return dp[sum][ind];
+}
+
+class Solution{
+
+	public:
+	int perfectSum(int arr[], int n, int sum)
+	{
+        // Your code goes here
+        
+        vector<vector<int>>dp(sum+1,vector<int>(n+1,-1));
+        
+        return myperfectSum(arr,dp,0,n,sum);
+        
+        
+	}
+	  
+};

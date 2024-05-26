@@ -1,0 +1,29 @@
+int myrob(vector<int>&nums,vector<int>&memo,int i)
+{
+   if(i<0)
+   return 0;
+
+   if(memo[i]>=0)
+   return memo[i];
+
+   int result=max(myrob(nums,memo,i-2)+nums[i],myrob(nums,memo,i-1));
+
+   memo[i]=result;
+
+   return memo[i];
+
+}
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+    
+    int n=nums.size();
+
+    vector<int>memo(n,-1);
+
+    return myrob(nums,memo,n-1);
+
+
+    }
+};

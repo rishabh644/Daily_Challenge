@@ -1,0 +1,30 @@
+int myminPathSum(int i,int j,int m,int n,vector<vector<int>>&grid,vector<vector<int>>&ans)
+{
+   if(i>=m || j>=n)
+   return INT_MAX;
+
+   if(ans[i][j]!=INT_MAX)
+   return ans[i][j];
+
+   if(i==m-1 && j==n-1)
+   return grid[i][j];
+
+   ans[i][j]=grid[i][j]+min(myminPathSum(i+1,j,m,n,grid,ans),myminPathSum(i,j+1,m,n,grid,ans));
+
+   return ans[i][j];
+
+}
+
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+        vector<vector<int>>ans(m,vector<int>(n,INT_MAX));
+        int i,j;
+
+        return myminPathSum(0,0,m,n,grid,ans);
+
+
+    }
+};

@@ -1,0 +1,37 @@
+int my_minimizeCost(vector<int>& height,vector<int>&ans,int i,int k)
+{
+    
+    
+    if(i==0)
+    return 0;
+    
+    if(i==1)
+    return abs(height[1]-height[0]);
+    
+    if(ans[i]!=INT_MAX)
+    return ans[i];
+    
+    for(int j=i-1;j>=max(i-k,0);j--)
+    {
+        ans[i]=min(ans[i],abs(height[i]-height[j])+my_minimizeCost(height,ans,j,k));
+    }
+    
+    return ans[i];
+    
+}
+
+
+class Solution {
+  public:
+    int minimizeCost(vector<int>& height, int n, int k) {
+        // Code here
+        
+        vector<int>ans(n,INT_MAX);
+        
+        
+        return my_minimizeCost(height,ans,n-1,k);
+        
+         
+        
+    }
+};

@@ -1,0 +1,25 @@
+    int rob(vector<int>& nums) {
+    
+    int n=nums.size();
+
+    if(n==0)
+    return 0;
+
+    vector<int>memo(n,-1);
+    
+    int prev1=0;
+    int prev2=0;
+    int tmp;
+
+
+    for(int num:nums)
+    {
+        tmp=prev1;
+        prev1=max(prev2+num,prev1);
+        prev2=tmp;
+    }
+
+    return prev1;
+    
+
+    }

@@ -1,0 +1,44 @@
+bool dfs(int ver,int parent,vector<bool>&visited,vector<int>adj[])
+{
+    visited[ver]=true;
+    
+    for(auto adjv:adj[ver])
+    {
+        if(!visited[adjv])
+        {
+            if(dfs(adjv,ver,visited,adj))
+            return true;
+        }
+        else if(adjv!=parent)
+        {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[])
+    {
+        // Code here
+        
+        vector<bool>visited(V,0);
+        
+        for(int i=0;i<V;i++)
+        {
+            if(!visited[i])
+            {
+                if(dfs(i,-1,visited,adj))
+                return true;
+            }
+        }
+        
+        
+        return false;
+        
+    }
+};

@@ -1,0 +1,66 @@
+void bfs(vector<vector<int>>&image,vector<vector<int>>&discovered,int sr,int sc,int color)
+{
+    
+    queue<pair<int,int>>qu;
+    qu.push({sr,sc});
+    pair<int,int>pr;
+    int x,y;
+    int xx,yy;
+    int m=image.size();
+    int n=image[0].size();
+    
+    discovered[sr][sc]=color;
+
+    while(!qu.empty())
+    {
+        pr=qu.front();
+        qu.pop();
+        x=pr.first;
+        y=pr.second;
+
+        for(auto mv:mov)
+        {          
+           xx=x+mv.first;
+           yy=y+mv.second;
+
+           if( (xx>=0 && xx<m) && (yy>=0 && yy<n) && (image[xx][yy]==image[x][y]) && discovered[xx][yy]!=color)
+           {
+              discovered[xx][yy]=color;
+              qu.push({xx,yy});
+           }
+
+        }
+                
+    }
+
+
+}
+
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+    
+     //return image;
+
+     int i,j;
+     int m=image.size();
+     int n=image[0].size();
+     vector<vector<int>>discovered(m,vector<int>(n,0));
+     bfs(image,discovered,sr,sc,color);   
+
+
+     for(i=0;i<image.size();i++)
+     {
+        for(j=0;j<image[0].size();j++)
+        {
+            if(discovered[i][j]!=0)
+            image[i][j]=color;
+        }
+     }
+
+     return image;
+
+
+
+    }
+};

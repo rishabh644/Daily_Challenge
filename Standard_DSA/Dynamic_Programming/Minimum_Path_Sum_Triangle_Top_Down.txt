@@ -1,0 +1,34 @@
+    int minimumTotal(vector<vector<int>>& triangle) {
+        
+       int m=triangle.size();
+
+       if(m==1)
+       return triangle[0][0];
+
+       vector<vector<int>>ans(m,vector<int>(m,INT_MAX));
+
+       int i,j;
+
+       for(j=0;j<m;j++)
+       {
+        ans[m-1][j]=triangle[m-1][j];
+       }
+       
+       i=m-2;
+       j=0;
+       while(i>=0)
+       {
+         j=0;
+         while(j<=i)
+         {
+            ans[i][j]=triangle[i][j]+min(ans[i+1][j],ans[i+1][j+1]);
+            j++;
+         }
+        
+        i-=1;
+
+       }
+
+       return ans[0][0];
+
+    }

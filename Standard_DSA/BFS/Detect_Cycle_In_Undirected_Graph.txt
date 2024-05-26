@@ -1,0 +1,73 @@
+bool isCyclebfs(int ver,vector<bool>&visited,vector<int>adj[])
+{
+    
+    queue<pair<int,int>>qu;
+    
+    visited[ver]=true;
+    qu.push({ver,-1});
+    
+    pair<int,int>pr;
+    
+    int node,parent;
+    
+    while(!qu.empty())
+    {
+        pr=qu.front();
+        
+        node=pr.first;
+        parent=pr.second;
+        
+        
+        qu.pop();
+        
+        for(auto adjv:adj[node])
+        {
+            if(visited[adjv]==false)
+            {
+                visited[adjv]=true;
+                qu.push({adjv,node});
+            }
+            else if(adjv!=parent)
+            {
+                return true;
+            }
+        }
+        
+    }
+    
+    return false;
+}
+
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[])
+    {
+        // Code here
+        
+        
+        vector<bool>visited(V,false);
+        
+ 
+        
+        pair<int,int>pr;
+        
+        for(int i=0;i<V;i++)
+        {
+            
+            if(visited[i]==false)
+            {
+                if(isCyclebfs(i,visited,adj))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false; 
+        
+        
+        
+        
+    }
+};
