@@ -1,0 +1,60 @@
+//User function template for C++
+
+// dict : given set of strings
+// pattern : given pattern
+class Solution
+{
+    public:
+    //Function to print all words in the CamelCase dictionary 
+    //that matches with a given pattern.
+    void findAllWords(vector<string> dict, string pattern) 
+    {
+        //Map to store the each word accompanied by its pattern
+	    map<string,string> key;
+
+    	// Map to store the hashing of each words with every uppercase letter found
+	    map<string, vector<string> > map;
+
+    	// Traverse the words array that contains all the string
+	    for (int i = 0; i < dict.size(); i++) {
+
+		    string str = "";
+    		// length of string words[i]
+	    	int l = dict[i].length();
+		    for (int j = 0; j < l; j++) {
+
+    			// For every uppercase letter found map that uppercase to original words
+	    		if (dict[i][j] >= 'A' && dict[i][j] <= 'Z') {
+		    		str += dict[i][j];
+			    	map[str].push_back(dict[i]);
+				    key[dict[i]] = str;
+    			}
+	    	}
+    	}
+
+	    bool wordFound = false;
+
+    	// Traverse the map for pattern matching
+	    vector<pair<string, string>> res;
+    	for (auto& it : map) {
+	    	if (it.first == pattern) {
+		    	wordFound = true;
+			    for (auto& itt : it.second) {
+				    res.push_back({key[itt],itt});
+    			}
+	    	}
+	    }
+	
+    	sort(res.begin(),res.end());
+	    
+    	//Printing words that match the given pattern
+	    for (auto str : res){
+	        cout << str.second<< " ";
+	    }
+	
+    	// If word not found print
+	    if (!wordFound) {
+		    cout << "No match found";
+	    }
+    }
+};

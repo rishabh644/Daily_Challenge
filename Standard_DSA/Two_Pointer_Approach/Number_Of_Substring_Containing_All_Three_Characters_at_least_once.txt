@@ -1,0 +1,97 @@
+Given a string s consisting only of characters a, b and c.
+
+Return the number of substrings containing at least one occurrence of all these characters a, b and c.
+
+//Brute Force Approach
+
+bool contains(string s,int i,int j)
+{
+    bool a=false;
+    bool b=false;
+    bool c=false;
+
+    for(int m=i;m<=j;m++)
+    {
+        if(s[m]=='a')
+        a=true;
+        else if(s[m]=='b')
+        b=true;
+        else
+        c=true;
+
+        if(a&b&c)
+        return true;
+    }
+    
+    return false;
+}
+
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        
+        int n=s.size();
+
+        int i,j;
+
+        int count=0;
+
+        for(i=0;i<=n-3;i++)
+        {
+            for(j=i+2;j<n;j++)
+            {
+                  if(contains(s,i,j))
+                  {
+                    count++;
+                  }
+            }
+        }
+        
+        return count;
+        
+        
+                                           }
+};
+
+// Optimized
+
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        
+        int n=s.size();
+        int count=0;
+        int minind;
+
+        int l1=-1,l2=-1,l3=-1;
+        int len;
+
+        for(int i=0;i<n;i++)
+        {
+            l1=( s[i]=='a' )?i:l1;
+            l2=( s[i]=='b' )?i:l2;
+            l3=( s[i]=='c' )?i:l3;
+            
+            if(l1==-1 || l2==-1 || l3==-1)
+            continue;
+
+            minind=min(l1,min(l2,l3));
+            
+            count+=minind+1;
+        }
+        
+        return count;
+
+    }
+};
+// c++
+    int numberOfSubstrings(string s) {
+        int count[3] = {0, 0, 0},res = 0 , i = 0, n = s.length();
+        for (int j = 0; j < n; ++j) {
+            ++count[s[j] - 'a'];
+            while (count[0] && count[1] && count[2])
+                --count[s[i++] - 'a'];
+            res += i;
+        }
+        return res;
+    }

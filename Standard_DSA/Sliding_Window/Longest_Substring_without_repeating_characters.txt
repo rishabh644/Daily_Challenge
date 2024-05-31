@@ -1,0 +1,66 @@
+nt lengthOfLongestSubstring(string s) {
+        
+        int ans=0;
+        int i,j;
+        int n=s.size();
+
+        unordered_map<char,int>ump;
+
+        int last_repeat=-1;
+        
+        for(i=0;i<n;i++)
+        {
+             if(ump.find(s[i])!=ump.end())
+             {
+                last_repeat=max(last_repeat,ump[s[i]]);
+             }
+             ump[s[i]]=i;             
+             ans=max(ans,i-last_repeat);
+
+        }
+
+
+        return ans;   
+
+        if(s.length()==0) return 0;
+
+
+
+    }
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+    
+    int n=s.size();
+    
+    if(n==0 || n==1)
+    return n;
+
+    unordered_map<char,int>ump;
+
+    int sl=0;
+    int fs=0;
+    int ans=0;
+    while(fs<n)
+    {  
+       if((ump.find(s[fs])==ump.end() || sl>ump[s[fs]]))
+       {
+         ans=max(ans,fs-sl+1);
+       }
+       else
+       {
+        ans=max(ans,fs-sl);
+        sl=ump[s[fs]]+1;
+       }
+       cout<<ans<<endl;
+       ump[s[fs]]=fs;
+       fs++;     
+    }
+    
+    return ans;
+
+    }
+};
+

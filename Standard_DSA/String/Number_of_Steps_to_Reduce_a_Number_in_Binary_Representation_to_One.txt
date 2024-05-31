@@ -1,0 +1,48 @@
+Given the binary representation of an integer as a string s, return the number of steps to reduce it to 1 under the following rules:
+
+If the current number is even, you have to divide it by 2.
+
+If the current number is odd, you have to add 1 to it.
+
+It is guaranteed that you can always reach one for all test cases.
+
+class Solution {
+public:
+    int numSteps(string s) {   
+        int i=s.size()-1,j;
+        int count=0;
+        while(i>0)
+        {  count++;
+           if(s[i]=='0')
+           { 
+            i--;
+            continue;
+           }
+           else
+           {
+              j=i;
+              while(j>=0)
+              {
+                if(s[j]=='1')
+                {
+                    s[j]='0';
+                }
+                else
+                {
+                    s[j]='1';
+                    break;                
+                }
+                j-=1;
+              }
+
+              if(j==-1)
+              {
+                s='1'+s;
+                i+=1;
+              }
+           }
+           
+        }
+        return count;
+    }
+};

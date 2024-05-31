@@ -1,0 +1,31 @@
+class Solution {
+public:    
+    int characterReplacement(string s, int k) {
+
+    int len=s.size();
+
+    vector<int>count(26,0);
+
+    int start=0;
+    int end=0;
+    int maxCount=0;
+    int maxLength=0;
+
+    while(end<len)
+    {
+
+        maxCount=max(maxCount,++count[s[end]-'A']);
+        while((end-start+1-maxCount)>k)
+        {
+            count[s[start]-'A']--;
+            start++;
+        }
+
+        maxLength=max(maxLength,end-start+1);
+        end++;
+    }     
+
+    return maxLength; 
+        
+    }
+};

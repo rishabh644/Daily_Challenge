@@ -1,0 +1,74 @@
+struct TrieNode {
+    struct TrieNode *children[ALPHABET_SIZE];
+
+    // isLeaf is true if the node represents
+    // end of a word
+    bool isLeaf;
+     TrieNode() {
+        isLeaf = false;
+        for(int i = 0; i < 26; i++) {
+            children[i] = nullptr;
+        }
+};
+*/
+class Solution
+{
+    public:
+      TrieNode* getNode() {
+        TrieNode* node = new TrieNode;
+        node->isLeaf = false;
+        for (int i = 0; i < 26; i++) {
+            node->children[i] = NULL;
+        }
+        return node;
+    }
+        //Function to insert string into TRIE.
+        void insert(struct TrieNode *root, string key)
+        {
+            // code here
+            int index;
+            struct TrieNode* temp=root;
+            for(int i=0;i<key.size();i++)
+            {
+               index=key[i]-'a';
+               if(temp->children[index]==NULL)
+               {
+                  
+                  temp->children[index]=getNode();
+               
+                  
+               }
+               
+               temp=temp->children[index];
+               
+            }
+            
+            temp->isLeaf=true;
+            
+            
+        }
+        
+        //Function to use TRIE data structure and search the given string.
+        bool search(struct TrieNode *root, string key) 
+        {
+            // code here
+            
+            int index;
+            int i=0;
+            struct TrieNode* temp=root;
+            while(i<key.size())
+            {
+                index=key[i]-'a';
+                if(temp->children[index]==NULL)
+                return false;
+                
+                temp=temp->children[index];
+                i++;
+            }
+            
+            if(temp!=NULL && temp->isLeaf==true)
+            return true;
+            
+            return false;
+        }
+};

@@ -1,0 +1,27 @@
+int specialArray(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int len=nums.size();
+        int count;
+        while(len>=0){
+            count=(nums.end()-lower_bound(nums.begin(),nums.end(),len));
+            if(count==len)
+            return len;
+            len-=1;
+        }  
+        return -1;
+    }
+
+// Using MultiSet
+
+    int specialArray(vector<int>& nums) {
+        multiset<int>ms(nums.begin(),nums.end());
+        int len=nums.size();
+        int count;
+        while(len>=0){
+            count=distance(ms.lower_bound(len),ms.end());
+            if(count==len)
+            return len;
+            len-=1;
+        }  
+        return -1;
+    }

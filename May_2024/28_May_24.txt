@@ -1,0 +1,30 @@
+You are given two strings s and t of the same length and an integer maxCost.
+
+You want to change s to t. Changing the ith character of s to ith character of t costs |s[i] - t[i]| (i.e., the absolute difference between the ASCII values of the characters).
+
+Return the maximum length of a substring of s that can be changed to be the same as the corresponding substring of t with a cost less than or equal to maxCost. If there is no substring from s that can be changed to its corresponding substring from t, return 0.
+
+class Solution:
+    def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
+        cost_to_change=[0]*len(s)
+
+        for i in range(len(s)):
+            cost_to_change[i]=abs(ord(s[i])-ord(t[i]))
+        
+        sl=0
+        fs=0
+
+        cost=0
+        mlen=0
+
+        while(fs<len(s)):
+            cost+=cost_to_change[fs]
+
+            if(cost>maxCost):
+                mlen=max(mlen,fs-sl)
+                while(sl<=fs and cost>maxCost):
+                    cost-=cost_to_change[sl]
+                    sl+=1
+            fs+=1
+        mlen=max(mlen,fs-sl)
+        return mlen

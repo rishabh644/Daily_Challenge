@@ -1,0 +1,37 @@
+There are several cards arranged in a row, and each card has an associated number of points. The points are given in the integer array cardPoints.
+
+In one step, you can take one card from the beginning or from the end of the row. You have to take exactly k cards.
+
+Your score is the sum of the points of the cards you have taken.
+
+Given the integer array cardPoints and the integer k, return the maximum score you can obtain.
+
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+
+        int n=cardPoints.size();
+
+        return max(cardPoints[0]+mymaxScore(cardPoints,1,n-1,k-1,n),cardPoints[n-1]+mymaxScore(cardPoints,0,n-2,k-1,n));        
+        
+
+    }
+private:
+     int mymaxScore(vector<int>&cardPoints,int i,int j,int k,int n)
+     {  
+        if(k==0)
+        return 0;
+
+        if(i==n && j==-1)
+        return 0;
+        
+        if(i==n && j!=-1)
+        return cardPoints[j]+mymaxScore(cardPoints,i,j-1,k-1,n);
+
+        if(j==-1 && i!=n)
+        return cardPoints[i]+mymaxScore(cardPoints,i+1,j,k-1,n);
+        
+        return max(cardPoints[i]+mymaxScore(cardPoints,i+1,j,k-1,n),cardPoints[j]+mymaxScore(cardPoints,i,j-1,k-1,n));
+
+     }
+};

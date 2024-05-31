@@ -1,0 +1,55 @@
+Given a list of words, list of  single letters (might be repeating) and score of every character.
+
+Return the maximum score of any valid set of words formed by using the given letters (words[i] cannot be used two or more times).
+
+It is not necessary to use all characters in letters and each letter can only be used once. Score of letters 'a', 'b', 'c', ... ,'z' is given by score[0], score[1], ... , score[25] respectively.
+
+    int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) {
+        
+        if(words.size()==0 || letters.size()==0 || score.size()==0)
+        return 0;
+
+        vector<int>count(score.size(),0);
+        
+        for(char ch:letters)
+        {
+            count[ch-'a']++;
+        }
+        int res=backtrack(words,count,score,0);
+        return res;
+    }
+    int backtrack(vector<string>&words,vector<int>&count,vector<int>&score,int index)
+    {
+        int mx=0;
+        int res=0;
+        bool isValid=true;
+        for(int i=index;i<words.size();i++)
+        {
+                res=0;
+                isValid=true;
+
+                for(char ch:words[i])
+                {
+                    count[ch-'a']--;
+                    res+=score[ch-'a'];
+
+                    if(count[ch-'a']<0)isValid=false;
+                }
+                if(isValid)
+                {
+                    res+=backtrack(words,count,score,i+1);
+                    mx=max(res,mx);
+                }
+
+                for(char ch:words[i])
+                {
+                    count[ch-'a']++;
+                    res=0;
+                }
+
+
+        }
+
+        return mx;
+
+    }

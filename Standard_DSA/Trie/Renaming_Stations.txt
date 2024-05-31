@@ -1,0 +1,59 @@
+void insert(struct Node* root,string s,vector<string>&ans)
+{
+    
+    int index;
+    string st="";
+    bool p=false;
+    
+    for(int i=0;i<s.size();i++)
+    {
+        st+=s[i];
+        
+        index=s[i]-'a';
+        
+        if(root->children[index]==NULL)
+        {   if(!p){
+            ans.push(st);
+            p=true;
+            }
+            root->children[index]=newNode();
+        }
+        root=root->children[index];
+    }
+    
+    if(root->isEndOfWord)
+    {
+      root->count=root->count+1;
+      
+      st=st+" "+toString(root->count);
+    }
+    else
+    {
+        root->isEndOfWord=true;
+        root->count=1;
+    }
+}
+
+class Solution
+{
+    public:
+    void check(string *arr, int n){
+    //code here
+    
+    struct Node* root=newNode();
+    
+    vector<string>ans;
+    
+    for(int i=0;i<n;i++)
+    {
+       insert(root,arr[i],ans);   
+    }
+    
+    for(auto it:ans)
+    {
+        cout<<it<<endl;
+    }
+       
+    }
+
+};
