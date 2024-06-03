@@ -1,0 +1,9 @@
+You are given three sticks of length a, b, c. You need to check whether it is possible to make a triangle with a positive area using these three sticks.
+
+Return "YES" if it is possible else return "NO".
+
+ string isPossible(int a, int b, int c) {
+        // code here
+        
+        return (a<(b+c) && b<(a+c) && c<(b+a))?"YES":"NO";
+    }

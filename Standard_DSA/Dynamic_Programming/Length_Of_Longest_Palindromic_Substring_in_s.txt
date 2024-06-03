@@ -1,0 +1,42 @@
+Given a string s, return the longest 
+palindromic substring in s.
+
+    string longestPalindrome(string s) {
+        int n=s.size();
+        if(n<=1)
+        return s;
+        vector<vector<bool>>dp(n,vector<bool>(n,false));
+
+        int i,j,len,start=0;
+        int maxlen=1;
+        
+        for(i=0;i<=n-2;i++)
+        {   dp[i][i]=true;
+            if(s[i]==s[i+1])
+            {
+            maxlen=2;
+            start=i;
+            dp[i][i+1]=true;
+            }
+
+        }
+        dp[n-1][n-1]=true;
+        for(len=3;len<=n;len++)
+        {
+            for(i=0;i<=n-len;i++)
+            {
+                j=i+len-1;
+                if(dp[i+1][j-1] && s[i]==s[j] )
+                {  dp[i][j]=true;
+                   if(len>maxlen){
+                   maxlen=len;
+                   start=i;    }
+                }
+
+            }
+
+        }
+
+        return s.substr(start,maxlen);
+
+    }

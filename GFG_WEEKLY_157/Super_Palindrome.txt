@@ -1,0 +1,55 @@
+You are given two integers l and r. You have to count how many super palindrome numbers are there in the range [l , r](both inclusive).
+
+A number is called super palindrome if it is a palindrome in its decimal representation as well as a perfect square number.
+
+bool isPalindrome(int n)
+{
+    int rev=0;
+    int no=n;
+    
+    while(n)
+    {
+        int digit=n%10;
+        n/=10;
+        rev*=10;
+        rev+=digit;
+        
+    }
+    
+    if(rev==no)
+    return true;
+    else
+    return false;
+    
+}
+
+
+
+class Solution {
+  public:
+    int countSuperPalindrome(int l, int r) {
+        // code here
+        
+        int sqrtl=(int)sqrt(l);
+        int sqrtr=(int)sqrt(r);
+        int count=0;
+        
+        sqrtl=sqrtl*sqrtl==l?sqrtl:sqrtl+1;
+        
+        for(int i=sqrtl;i<=sqrtr;i++)
+        {
+            if(isPalindrome(i*i))
+            {
+            //cout<<i*i<<endl;        
+            count++;
+            }
+        }
+        
+        
+        return count;
+        
+                
+        
+        
+    }
+}; 

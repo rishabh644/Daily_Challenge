@@ -33,26 +33,26 @@ class Solution
                index=key[i]-'a';
                if(temp->children[index]==NULL)
                {
-                  
+
                   temp->children[index]=getNode();
-               
-                  
+
+
                }
-               
+
                temp=temp->children[index];
-               
+
             }
-            
+
             temp->isLeaf=true;
-            
-            
+
+
         }
-        
+
         //Function to use TRIE data structure and search the given string.
-        bool search(struct TrieNode *root, string key) 
+        bool search(struct TrieNode *root, string key)
         {
             // code here
-            
+
             int index;
             int i=0;
             struct TrieNode* temp=root;
@@ -61,14 +61,56 @@ class Solution
                 index=key[i]-'a';
                 if(temp->children[index]==NULL)
                 return false;
-                
+
                 temp=temp->children[index];
                 i++;
             }
-            
+
             if(temp!=NULL && temp->isLeaf==true)
             return true;
-            
+
             return false;
+        }
+
+        TrieNode *delKey(TrieNode *root,string key,int i)
+        {
+             if(root==NULL)
+             return NULL;
+
+             if(i==key.size())
+             {
+                     root->isEnd=false;
+
+                    if(isEmpty(root)==true)
+                    {
+                        delete(root);
+                        root=NULL;
+                    }
+
+                    return root;
+             }
+
+             int index=key[i]-'a';
+
+             root->child[index]=delkey(root->child[index],key,i+1);
+
+             if(isEmpty(root) && root->isEnd==false)
+             {
+                 delete(root);
+                 root=NULL;
+
+             }
+
+             return root;
+        }
+
+        bool isEmpty(TrieNode *root)
+        {
+            for(int i=0;i<26;i++)
+            if(root->child[i]!=NULL)
+            return false;
+
+            return true;
+
         }
 };

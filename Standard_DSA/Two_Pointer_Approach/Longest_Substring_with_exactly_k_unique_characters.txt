@@ -36,3 +36,42 @@ class Solution{
     
     }
 };
+
+//Without using hashmap
+    int longestKSubstr(string s, int k) {
+    // your code here
+    vector<int>dict(26,0);
+    
+    int i=0;
+    int j=0;
+    
+    int n=s.size();
+    int maxlen=-1;
+    int distinct=0;
+    
+    while(j<n)
+    {
+        dict[s[j]-'a']++;
+        
+        if(dict[s[j]-a]==1)
+        distinct++;
+        
+        if(distinct>k)
+        {
+            dict[s[i]-'a']--;
+            
+            if(dict[s[i]-'a']==0)
+            distinct--;
+            
+            i++;
+            
+        }
+        if(distinct==k)
+        maxlen=max(maxlen,j-i+1);
+        
+        j++;
+    }
+    
+    return maxlen;
+    
+    }

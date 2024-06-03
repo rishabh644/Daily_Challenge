@@ -1,0 +1,34 @@
+You are given a string s, containing only characters 'a' and 'b'. In one operation you can replace substring "ab" with "bba".
+
+Find the minimum number of operations required to make so that no substring "ab" is present int the string s.
+
+Answer can be large so return it with modulo 10^9+7.
+
+int countOperations(string s) {
+        // code here
+        
+        
+        int ans=0;
+        int cntb=0;
+        int i=s.size()-1;
+        
+        int mod=1e9+7;
+        while(i>=0)
+        {
+            if(s[i]=='b')
+            {
+                cntb++;
+            }
+            else
+            {
+            ans=(ans+cntb)%mod;
+            cntb=(cntb*2)%mod;
+            }
+            
+            //cout<<" cntb "<<cntb<<endl;
+            
+            i-=1;
+        }
+        
+        return ans;
+    }
