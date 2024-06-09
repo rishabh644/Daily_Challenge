@@ -1,0 +1,42 @@
+A lambda function in Python is a small anonymous function defined with the 'lambda' keyword. It can take any number of arguments but can have one expression. The expression is evaluated and returned. Lambda functions are often used for short, throwaway functions or as arguments to higher-order functions like 'map()','filter()', and 'sorted()'.
+
+Syntax
+
+The syntax of a lambda function is:
+lambda arguments: expression
+
+Characteristics
+
+1. Anonymous: Lambda functions do not have a name. They are often used where a function is required temporarily for a short perioid of time.
+
+2. Single Expression: Lamda functions can only contain a single expression. They are syntactically restricted to a single line.
+
+3. Return Value: The value of the expression is automatically returned.
+
+Basic Example
+
+add=lambda x,y:x+y
+
+print(add(2,3)) # Output:5
+
+Using with map()
+
+numbers=[1,2,3,4]
+squared=map(lambda x:x**2,numbers)
+print(list(squared))
+
+Here,'lambda x:x**2' defines a function that squared its input.'map() applies this function to each element in the 'numbers' list.
+
+Using with 'filter'
+
+numbers=[1,2,3,4]
+even_numbers=filter(labda x:x%2==0,numbers)
+print(list(even_numbers)) # Output: [2,4]
+
+This example uses 'lambda x:x%2==0' to filter out only even numbers from the list.
+
+
+
+
+
+

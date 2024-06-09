@@ -1,0 +1,62 @@
+int findWinningPlayer(vector<int>& skills, int k) {
+          
+          int n=skills.size();
+
+          if(n==2)
+          {
+            if(skills[1]>skills[0])
+            return 1;
+            else
+            return 0;
+          }
+
+
+          if(k>n)
+          {
+            int maxind=0;
+
+            for(int i=1;i<n;i++)
+            {
+                if(skills[i]>skills[maxind])
+                maxind=i;
+            }
+            return maxind;
+          }
+          
+          queue<int>qu;
+
+          for(int i=0;i<n;i++)
+          {
+                 qu.push(i);
+          }
+          
+          int count=0,cur;
+          int last_win=qu.front();
+          qu.pop();
+          while(!qu.empty())
+          {
+               if(skills[last_win]>skills[qu.front()])
+               {
+                count++;
+                if(count==k)
+                return last_win;
+                cur=qu.front();
+                qu.pop();
+                qu.push(cur);
+               }
+               else
+               {
+                  qu.push(last_win);
+                  count=1;
+                  last_win=qu.front();
+                  qu.pop();
+
+                  if(count==k)
+                  return last_win;
+
+               } 
+
+          }
+
+        return last_win;
+    }

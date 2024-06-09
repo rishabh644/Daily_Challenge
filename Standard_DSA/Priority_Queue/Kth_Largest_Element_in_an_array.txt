@@ -1,0 +1,29 @@
+int findKthLargest(vector<int>& nums, int k) {
+        
+     priority_queue<int,vector<int>>pq(nums.begin(),nums.end());
+
+     while(--k)
+     {
+        pq.pop();
+     }     
+     
+     return pq.top();
+
+    }
+
+//
+int findKthLargest(vector<int>& nums, int k) {
+        
+        priority_queue<int>pq(nums.begin(),nums.end());
+
+        int nk=0;
+        int poped_item;
+
+        while(nk<k){
+            poped_item=pq.top();
+            pq.pop();
+            nk+=1;
+        }
+         
+        return poped_item; 
+    }

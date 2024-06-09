@@ -1,0 +1,115 @@
+You are given a string s. It may contain any number of '*' characters. Your task is to remove all '*' characters.
+
+While there is a '*', do the following operation:
+
+Delete the leftmost '*' and the smallest non-'*' character to its left. If there are several smallest characters, you can delete any of them.
+Return the 
+lexicographically smallest
+ resulting string after removing all '*' characters
+
+string clearStars(string s) {
+        
+        string ans;
+        stack<int>st;
+        unordered_set<int>delete_ind;
+        
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]=='*')
+            {
+                if(st.empty())
+                    continue;
+                delete_ind.insert(st.top());
+                st.pop();
+            }
+            else{
+                  if(st.empty())
+                  {
+                      st.push(i);
+                  }
+                  else
+                  {   stack<int>temp;
+                      while(!st.empty() && s[i]>s[st.top()])
+                      {
+                      
+                          temp.push(st.top());
+                          st.pop();
+                      }
+                      st.push(i);
+                   
+                      while(!temp.empty())
+                      {
+                          st.push(temp.top());
+                          temp.pop();
+                      }              
+                  }
+            }
+        }
+        
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]!='*' && delete_ind.find(i)==delete_ind.end())
+            {
+                ans+=s.substr(i,1);
+            }
+        }
+        
+        return ans;
+        
+    }
+
+/////***************///
+class Compare{
+    public:
+    bool operator()(pair<char,int>f,pair<char,int>s)
+         {
+            if(f.first==s.first )
+            {
+                return f.second<s.second;
+            }
+            return f.first>s.first;
+           
+         }
+};
+
+class Solution {
+public:
+    string clearStars(string s) {
+        
+        priority_queue<pair<char,int>,vector<pair<char,int>>,Compare>pq;
+
+        int n=s.size();
+
+        pair<char,int>pr;
+
+        string ans="";
+
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='*')
+            {
+                if(!pq.empty())
+                {
+                   pr=pq.top();
+                   pq.pop();
+                   s[pr.second]='%';
+                }
+            }
+            else
+            {
+                pq.push({s[i],i});
+            }
+
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]!='%' && s[i]!='*')
+            {
+              ans+=s[i];
+            }
+        }
+        
+        return ans;
+    }
+};
