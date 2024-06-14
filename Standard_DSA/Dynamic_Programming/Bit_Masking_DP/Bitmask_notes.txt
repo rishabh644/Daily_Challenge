@@ -1,0 +1,73 @@
+Bitmasking is a technique used in DP to efficiently
+represent and manipulate subsets of a set using binary numbers.
+It is particularly useful when you need to track the state
+of multiple items (e.g., elements,nodes or tasks) in a problem.
+Here's a simple explanation of how it works and how it is applied in DP.
+
+Basics of Bitmasking
+
+1. Binary Representation: Each subset of a set can be represented as a
+   binary number (bitmask). For example,if we have a set of 3 items, we can use 3 bits to represent
+   each subset:
+
+   * '000' represent the empty subset.
+   * '001' represent a subset containing only the 1st item.
+   * '010' represent a subset containing only the 2nd item.
+   * '011' represent a subset containing only the 1st and 2nd item.
+   * And soon
+
+2. Bitwise Operations: We can use bitwise operations to manipulate these bitmasks:
+   * '&' (AND): Check if a particular item is in the subset
+   * '|' (OR): Add an item to the subset.
+   * '^' (XOR): Toggle the presence of an item in the subset.
+   * '`' (NOT): Invert the bits.
+
+Applying Bitmasking in DP
+
+When using bitmasking in dynamin programming, the idea is to use a DP array where the
+index represent a bitmask of the subset. Here's how we can set it up:
+
+1. Define the DP Array: Suppose we need to solve a problem involving 'n' items.We define DP array 'dp' where 'dp[mask]'
+stores the result (e.g. minimum cost,maximum value tc) for the subset represented by 'mask'
+
+2. Initialize the DP Array: Start with the base case. For example,'dp[0]' might represent the
+initial state( e.g. not items included), and it's often initialized to zero or some base value.
+
+3. Iterate Over All subsets: Use nested loops to iterate over all possible subsets(bitmasks)
+and update the DP array based on the problem's rules.
+
+4. Transition Between States: Use bitwise operations to transition between states (subsets).
+For example,to add an item to a subset, you can use the OR operation.
+To check if an item is in a subset,use the AND operation.
+
+# Example Problem: TSP
+Consider a simple example: the Traveling Salesman Problem (TSP),where you need to find the shortest path that visits
+each city exactly once and returns to the starting city.
+
+1. Define DP Array: Let 'dp[mask][i]' be the minimum cost to visit all cities in the mask ending at city 'i'.
+
+2. Initialize: 'dp[1<<i][i]=cost[start][i]' for all cities 'i',meaning the cost to go from the start city to city 'i'.
+
+# Filling the DP table
+
+for mask in range(1<<n): #Iterate over all subsets
+    for u in range(n):   # Iterate over all cities
+        if mask & (1<<u): # If u is in the subset
+             for v in range(n): # Try to go to the next city
+                 if not mask & (1<<v): # If v is not in the subset
+                      new_mask=mask | (1<<v)
+                      dp[new_mask][v]=mask | (1<<v)
+                      dp[new_mask][v]=min(dp[new_mask][v],dp[mask][u]+cost[u][v])
+
+4. Find the Result: The answer will be the minimum cost to visit all cities and return to the
+start, which is found in 'dp[(1<<n)-1][start]'.
+
+Summart
+* Bitmasking is a powerful technique to represent subsets using binary numbers.
+* Bitwise operations allow efficient manipulation of these subsets.
+* DP with bitmasking can be used to solve problems involving multiple items where the
+state of each item needs to be tracked.
+* TSP is a classic eaxmple demonstrating bitmasking in DP.
+
+Using bitmasking can greatly simplify and speed up DP solutions for many combinatorial
+problems involving subsets.

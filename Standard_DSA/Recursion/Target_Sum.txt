@@ -1,0 +1,102 @@
+You are given an integer array nums and an integer target.
+You want to build an expression out of nums by adding one of the symbols '+' and '-' before each
+integer in nums and then concatenate all the integers.
+
+For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build the expression "+2-1".
+Return the number of different expressions that you can build, which evaluates to target.
+
+    int findmyTargetSumWays(int i,vector<int>& nums,int target)
+    {
+        if(i<0 && target==0)
+        return 1;
+
+        if(i<0 && target!=0)
+        return 0;
+
+        // take +
+        
+        int take_p=0;
+
+        take_p=findmyTargetSumWays(i-1,nums,target-nums[i]);
+
+        // take -
+
+        int take_n=0;
+
+        take_n=findmyTargetSumWays(i-1,nums,target+nums[i]);
+
+        return (take_p+take_n);
+
+
+    }
+    
+    int findTargetSumWays(vector<int>& nums, int target) {
+        
+        int n=nums.size();
+        
+        // vector<vector<int>>dp(n+1,vector<int>(target+1,0));
+
+        return findmyTargetSumWays(n-1,nums,target);
+
+   
+
+    }
+
+
+////////////////////****************************************/////////////////////////
+class Solution {
+
+string create_key(int i,int target){
+
+    string st=to_string(i)+","+to_string(target);
+
+    return st;
+}
+
+public:
+    int findmyTargetSumWays(int i,vector<int>& nums,int target,unordered_map<string,int>&ump)
+    {
+        if(i<0 && target==0)
+        return 1;
+
+        if(i<0 && target!=0)
+        return 0;
+
+        string key=create_key(i,target);
+
+        if(ump.find(key)!=ump.end())
+        return ump[key];
+
+        // take +
+        
+        int take_p=0;
+
+        take_p=findmyTargetSumWays(i-1,nums,target-nums[i],ump);
+
+        // take -
+
+        int take_n=0;
+
+        take_n=findmyTargetSumWays(i-1,nums,target+nums[i],ump);
+
+        ump[key]=(take_p+take_n);
+        
+        return ump[key];
+
+    }
+    
+    int findTargetSumWays(vector<int>& nums, int target) {
+        
+        int n=nums.size();
+        
+        // vector<vector<int>>dp(n+1,vector<int>(target+1,0));
+        
+        unordered_map<string,int>ump;
+
+        return findmyTargetSumWays(n-1,nums,target,ump);
+
+   
+
+    }
+};
+//////////////////////////////////*************************************///////////////////////////

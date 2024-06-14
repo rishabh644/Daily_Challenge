@@ -1,0 +1,12 @@
+The 'lower_bound' function is used in binary search operations. It returns an iterator pointing to the first element in a sorted range that is not less than a specified value.
+
+In this example, the 'lower_bound' function finds the first element in the vector that is not less than 3.
+
+Economics and Finance
+
+In economics and finance, a lower bound can refer to the minimum interest rate set by a central bank, often called the "zero lower bound" when it is at or near zero.
+
+Yes, the 'lower_bound' function in the C++ Standard Template Library (STL) is designed to be used on sorted ranges. The reason for this requirement is that 'lower_bound' uses binary search to find the 
+first element that is not less than the specifies value. Binary search is an efficient algorithm with a time complexity of O(logn) 
+ 
+
