@@ -37,11 +37,8 @@
 
     int cutRod(int price[], int n) {
         //code here
-
         // Create a memoization table to store results of subproblems
-
         vector<int>dp(n+1,-1);
-
         return mymaxProfit(n,price,dp);
 
 
