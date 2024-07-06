@@ -5,7 +5,9 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
 int maxProfit(vector<int>& prices) {
-               int profit=0;
+
+
+        int profit=0;
         int cp=prices[0];
 
         int i=1;
@@ -16,13 +18,13 @@ int maxProfit(vector<int>& prices) {
             if(prices[i]>cp)
             {
                 profit=max(profit,prices[i]-cp);
-            
+
             }
             else
             {cp=prices[i];
             }
             i+=1;
-        } 
+        }
 
        return profit;
 
@@ -47,8 +49,8 @@ int maxProfit(vector<int>& prices) {
             curmin=min(prices[i],curmin);
 
             i++;
-        }        
-        
+        }
+
         return maxprofit;
 
     }
@@ -72,8 +74,8 @@ int maxProfit(vector<int>& prices) {
             curmin=min(prices[i],curmin);
 
             i++;
-        }        
-        
+        }
+
         return maxprofit;
 
     }
@@ -88,7 +90,7 @@ int maxProfit(vector<int>& prices) {
             maxCur=max(0,maxCur+=(prices[i]-prices[i-1]));
             maxSoFar=max(maxCur,maxSoFar);
         }
-        
+
         return maxSoFar;
     }
 ///---
