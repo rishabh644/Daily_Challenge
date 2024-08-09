@@ -1,6 +1,8 @@
-    TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
+    TreeNode* createBinaryTree(vector<vector<int>>& descriptions)
+    {
 
         unordered_map<int,TreeNode* >ump;
+
         unordered_map<int,bool>isChild;
 
 
@@ -20,16 +22,21 @@
                 ump[cv]=new TreeNode(cv);
               }
 
-               if (isLeft == 1) {
-            ump[pv]->left = ump[cv];
-            } else {
-            ump[pv]->right = ump[cv];
+               if (isLeft == 1)
+              {
+               ump[pv]->left = ump[cv];
+              }
+             else
+             {
+              ump[pv]->right = ump[cv];
              }
 
              isChild[cv]=true;
-             if (isChild.find(pv) == isChild.end()) {
+
+             if(isChild.find(pv) == isChild.end())
+            {
               isChild[pv] = false;}
-        }
+            }
 
 
 

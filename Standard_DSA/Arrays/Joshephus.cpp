@@ -19,9 +19,12 @@ int findTheWinner(int n, int k) {
         {
 
             if(mark[i]==true)
-            visited+=1;
+            {
+                 visited+=1;
 
-            prev=i;
+                 prev=i;
+            }
+
             i=(i+1)%n;
         }
 
@@ -51,8 +54,11 @@ int findTheWinner(int n, int k) {
 
      vector<int>circle;
 
-     for(int i=1;i<=n;i++){
+     for(int i=1;i<=n;i++)
+     {
+
         circle.push_back(i);
+
      }
 
     // Maintain the index of the friend to start the count on

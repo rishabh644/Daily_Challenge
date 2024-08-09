@@ -6,13 +6,18 @@ public:
         if(dp[i][j][x][y] != -1) return dp[i][j][x][y];
 
         int mini = 1e9;
-        if(i<j){
-            for(int k = i;k<j;k++){
+
+        if(i<j)
+        {
+            for(int k = i;k<j;k++)
+            {
                 mini = min(mini,ver[k] + solve(i,k,x,y,hor,ver,dp)+solve(k+1,j,x,y,hor,ver,dp));
             }
+
         }
 
-        if(x<y){
+        if(x<y)
+        {
             for(int k = x;k<y;k++){
                 mini = min(mini,hor[k] + solve(i,j,x,k,hor,ver,dp) + solve(i,j,k+1,y,hor,ver,dp));
             }

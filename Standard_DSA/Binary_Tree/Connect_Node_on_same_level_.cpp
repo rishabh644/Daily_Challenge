@@ -1,4 +1,5 @@
-Node* connect(Node* root){
+Node* connect(Node* root)
+{
 
     if(root==NULL)
         return root;
@@ -18,7 +19,8 @@ Node* connect(Node* root){
 
           if(current->left!=NULL)
           {
-              if(prev!=NULL){
+              if(prev!=NULL)
+              {
                   prev->next = current->left;
               }
               else
@@ -32,9 +34,11 @@ Node* connect(Node* root){
            // Connect the right child
 
 
-          if(current->right!=NULL){
+          if(current->right!=NULL)
+           {
 
-                if(prev!=NULL){
+                 if(prev!=NULL)
+                 {
                     prev->next = current->right;
                  }
                  else
@@ -43,7 +47,7 @@ Node* connect(Node* root){
                  }
 
                  prev = current->right;
-                                 }
+           }
 
            // Move to the next node in the current level using the next pointer
 

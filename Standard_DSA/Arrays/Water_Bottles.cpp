@@ -9,7 +9,7 @@
 // Given the two integers numBottles and numExchange, return the maximum number of water
 // bottles you can drink.
 
-    int numWaterBottles(int numBottles, int numExchange) {
+int numWaterBottles(int numBottles, int numExchange) {
 
        int ans=0;
        int emptybtl=0;

@@ -21,8 +21,10 @@ int maxProfit(std::vector<int>& prices) {
     }
 
     // Bottom-up calculation
-    for (int i = n - 1; i >= 0; --i) {
-        for (int j = 1; j <= count; ++j) {
+    for (int i = n - 1; i >= 0; --i)
+    {
+        for (int j = 1; j <= count; ++j) 
+        {
             dp[i][j][0] = std::max(dp[i + 1][j][0], -prices[i] + dp[i + 1][j][1]);
             dp[i][j][1] = std::max(dp[i + 1][j][1], prices[i] + dp[i + 1][j - 1][0]);
         }

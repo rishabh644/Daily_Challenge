@@ -1,10 +1,13 @@
-# You are given an r rows and c cols matrix grid representing a field of chocolates where grid[i][j] represents the number of chocolates that you can collect from the (i, j) cell.
+# You are given an r rows and c cols matrix grid representing
+# a field of chocolates where grid[i][j] represents the number
+# of chocolates that you can collect from the (i, j) cell.
 
 # You have two robots that can collect chocolates for you:
 
 # Robot #1 is located at the top-left corner (0, 0), and
 # Robot #2 is located at the top-right corner (0, cols - 1).
-# Return the maximum number of chocolates collection using both robots by following the rules below:
+# Return the maximum number of chocolates collection using
+# both robots by following the rules below:
 
 # From a cell (i, j), robots can move to cell (i + 1, j - 1), (i + 1, j), or (i + 1, j + 1).
 # When any robot passes through a cell, It picks up all chocolates, and the cell becomes an empty cell.
@@ -30,9 +33,7 @@ class Solution:
             currpath.pop()
 
         visited.add((i,j))
-
         currpath.append((i,j))
-
         for item in self.mov:
             self.dfs(i+item[0],j+item[1],n,m,pathsA,currpath,visited)
 

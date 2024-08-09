@@ -18,14 +18,14 @@ unordered_map<int,ListNode*>ump;
 
 public:
     LRUCache(int capacity) {
-      
+
          this->capacity=capacity;
          crsz=0;
          head=new ListNode(0,0);
          tail=new ListNode(0,0);
          head->next=tail;
          tail->prev=head;
-    
+
                            }
     void insert_after_head(ListNode *temp)
     {
@@ -44,7 +44,7 @@ public:
         insert_after_head(temp);
         return temp->val;
     }
-    
+
     void put(int key, int value) {
         if(ump.find(key)!=ump.end())
         {
@@ -66,7 +66,7 @@ public:
              tail->prev->prev->next=tail;
              tail->prev=tail->prev->prev;
              ListNode *temp=new ListNode(key,value);
-             
+
              ump[key]=temp;
              insert_after_head(temp);
 

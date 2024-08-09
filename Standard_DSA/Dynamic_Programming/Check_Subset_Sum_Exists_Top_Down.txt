@@ -9,16 +9,19 @@ int myisSubsetSum(vector<int>&arr,vector<vector<int>>&memo,int i,int sum)
     if(memo[sum][i]!=-1)
     return memo[sum][i];
     
-    memo[sum][i]=( myisSubsetSum(arr,memo,i+1,sum-arr[i]) || myisSubsetSum(arr,memo,i+1,sum) );
+    memo[sum][i]=(myisSubsetSum(arr,memo,i+1,sum-arr[i]) || myisSubsetSum(arr,memo,i+1,sum));
     
     return memo[sum][i];
     
        
 }
 
-class Solution{   
-public:
-    bool isSubsetSum(vector<int>arr, int sum){
+class Solution
+{   
+
+    public:
+    bool isSubsetSum(vector<int>arr, int sum)
+    {
         // code here 
         
         int n=arr.size();
@@ -28,4 +31,6 @@ public:
         return myisSubsetSum(arr,memo,0,sum);
         
     }
+
+
 };

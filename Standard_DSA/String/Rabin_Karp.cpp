@@ -91,7 +91,7 @@ void rabin_karp_match(string& text,string& patt,int base,int prime)
             }
             if (match)
                 cout << patt << " occurs with shift " << i << endl;
-           }
+        }
     }
 }
 

@@ -1,0 +1,3 @@
+// Backtracking algorithm are often much
+// faster than the brute-force search algorithm
+// since it eliminates many unnecessary exploration

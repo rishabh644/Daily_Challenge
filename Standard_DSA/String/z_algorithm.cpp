@@ -26,8 +26,10 @@ vector<int> calculateZArray(const string& s){
             }
 
             Z[i] = R - L;
+
             R--;
-               }
+
+              }
         else {
 
             K = i - L;
