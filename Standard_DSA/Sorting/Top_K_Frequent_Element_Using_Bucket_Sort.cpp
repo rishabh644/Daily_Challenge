@@ -25,7 +25,8 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
 
     vector<int>res;
 
-    for(int i=bucket.size()-1;i>=0;i--){
+    for(int i=bucket.size()-1;i>=0;i--)
+    {
         for(auto it:bucket[i])
         {
             res.push_back(it);

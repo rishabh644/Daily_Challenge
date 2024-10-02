@@ -17,7 +17,7 @@
        qu.pop();
        word=pr.first;
        dis=pr.second;
-       
+
        if(word==endWord)
        return dis;
 
@@ -33,8 +33,9 @@
               {
                 qu.push({word,dis+1});
               }
+
            }
-           
+
            word[j]=c;
 
        }

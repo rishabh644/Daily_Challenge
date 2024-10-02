@@ -10,7 +10,8 @@ public:
 
       // Initialize adjacency list and shortest path matrix
 
-      for(int i=0;i<n;i++){
+      for(int i=0;i<n;i++)
+      {
         shortestPathMatrix[i][i]=0; // Distance to itself is zero
       }
 

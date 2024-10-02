@@ -1,4 +1,5 @@
-int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k)
+{
 
         vector< vector< pair<int,int> > >vp(n);
 
@@ -31,13 +32,14 @@ int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int
 /////////////////////////////////////-------------------------------------///////////////////////////////////
 
 void relax_edge(vector<int>&edge,vector<int>&curr,vector<int>&ans)
-    {
+{
         int s=edge[0];
         int d=edge[1];
         int cst=edge[2];
 
         if(curr[s]!=INT_MAX)
         {
+
             if(ans[d]==INT_MAX)
             {
                 ans[d]=curr[s]+cst;
@@ -46,11 +48,14 @@ void relax_edge(vector<int>&edge,vector<int>&curr,vector<int>&ans)
             {
                 ans[d]=curr[s]+cst;
             }
+
         }
 
-    }
 
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+}
+
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) 
+    {
 
 
         vector<int>ans(n,INT_MAX);

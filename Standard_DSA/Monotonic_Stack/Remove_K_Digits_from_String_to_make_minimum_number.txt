@@ -24,19 +24,18 @@ public:
             count++;
         }
 
-        
+
         st.push(dgt);
-        
+
 
         i++;
        }
-       
+
 
        while(!st.empty() && count<k)
        {
         st.pop();
         count++;
-       
        }
 
        string ans="";
@@ -58,7 +57,7 @@ public:
 
 
         return ans;
-      
+
 
     }
 };

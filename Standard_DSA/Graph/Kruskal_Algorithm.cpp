@@ -88,11 +88,13 @@ class Solution
             int x=e[0];
             int y=e[1];
             int c=e[2];
+
             if(obj.find(x)!=obj.find(y))
             {
                 obj.unionsets(x,y);
                 cost+=c;
             }
+
         }
 
         return cost;
