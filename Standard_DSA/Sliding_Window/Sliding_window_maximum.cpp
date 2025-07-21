@@ -81,3 +81,57 @@ public:
 
     }
 };
+///////////////////////////////////////////////////////----------------------------------///////////////////////////////------------------------//////////////////////////---------------------////////////////////////////////-----------------------/////////////////////////////------------------------------
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k)
+    {
+       deque<int>dq;
+
+       int i=0;
+       int n=nums.size();
+       vector<int>ans;
+       while(i<k-1)
+       {
+
+          while(!dq.empty() && nums[dq.back()]<=nums[i])
+          {
+
+            dq.pop_back();
+
+          }
+
+          dq.push_back(i);
+
+          i+=1;
+       }
+
+       while(i<n)
+       {
+
+          if(!dq.empty() && dq.front()<=(i-k) )
+          {
+
+            dq.pop_front();
+
+          }
+
+           while(!dq.empty() && nums[dq.back()]<=nums[i])
+          {
+
+            dq.pop_back();
+
+          }
+
+          dq.push_back(i);
+
+          ans.push_back(nums[dq.front()]);
+
+          i+=1;
+
+       }
+
+       return ans;
+
+    }
+};

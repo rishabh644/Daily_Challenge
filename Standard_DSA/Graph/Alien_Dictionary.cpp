@@ -98,3 +98,94 @@ public:
     }
 
 };
+//////////////////////////
+class Solution {
+public:
+    string alienOrder(vector<string>& words)
+    {
+
+        unordered_map<char,vector<char>>ump;
+
+        unordered_map<char,int>indegree;
+
+        string sta;
+        string stb;
+
+        unordered_set<char>ust;
+
+        for(int i=0;i<words.size();i++)
+        {
+            sta=words[i];
+
+            for(int j=i+1;j<words.size();j++)
+            {
+
+              stb=words[j];
+
+              int lab=min(sta.size(),stb.size());
+              int k=0;
+              for( k=0;k<lab;k++)
+              {
+
+                if(sta[k]!=stb[k])
+                {
+                    ump[sta[k]].push_back(stb[k]);
+                    indegree[stb[k]]+=1;
+                    break;
+                }
+
+              }
+
+              if(k==lab && k<sta.size() )
+              return "";
+
+
+
+
+            }
+
+            for(char ch:sta)
+            {
+                ust.insert(ch);
+            }
+
+        }
+
+        string ans;
+
+        queue<char>qu;
+
+        for( char ch:ust)
+        {
+            if(indegree[ch]==0)
+            {
+                qu.push(ch);
+            }
+        }
+
+        while(!qu.empty())
+        {
+            char v=qu.front();
+            ans=ans+v;
+
+            for(auto adjv:ump[v])
+            {
+                indegree[adjv]-=1;
+
+                if(indegree[adjv]==0)
+                qu.push(adjv);
+            }
+
+
+            qu.pop();
+
+        }
+
+        if(ans.size()==ust.size())
+        return ans;
+        else
+        return "";
+
+
+    }
+};

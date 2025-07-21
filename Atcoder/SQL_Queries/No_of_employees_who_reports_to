@@ -1,0 +1,3 @@
+with TB1 as (select reports_to as employee_id,count(employee_id) as reports_count,round(avg(age)) as average_age from Employees where reports_to is not NULL group by reports_to)
+
+select TB1.employee_id,Employees.name,TB1.reports_count,TB1.average_age from TB1 join Employees on TB1.employee_id=Employees.employee_id order by TB1.employee_id

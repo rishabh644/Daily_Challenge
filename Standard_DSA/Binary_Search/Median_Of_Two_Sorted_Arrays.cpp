@@ -66,3 +66,58 @@ public:
     }
 
 };
+///////////////////
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
+    {
+        int X=nums1.size();
+        int Y=nums2.size();
+
+        if(X>Y)
+        return findMedianSortedArrays(nums2,nums1);
+
+        int l=0;
+        int h=X;
+
+        while(l<=h)
+        {
+
+           int px=(l+h)/2;
+
+           int py=(X+Y+1)/2-px;
+
+           int maxx=(px==0)?INT_MIN:nums1[px-1];
+           int minx=(px==X)?INT_MAX:nums1[px];
+
+           int maxy=(py==0)?INT_MIN:nums2[py-1];
+           int miny=(py==Y)?INT_MAX:nums2[py];
+
+           if(maxx<=miny && maxy<=minx)
+           {
+                if((X+Y)%2==0)
+                {
+                   return (max(maxx,maxy)+min(minx,miny))/2.0;
+                }
+                else
+                {
+                    return max(maxx,maxy);
+                }
+
+           }
+           else if(maxx>miny)
+           {
+            h=px-1;
+           }
+           else
+           {
+            l=px+1;
+           }
+
+        }
+
+
+        return -1;
+
+    }
+};

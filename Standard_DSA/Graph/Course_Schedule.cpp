@@ -74,3 +74,64 @@ class Solution
 
     }
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Solution {
+public:
+    bool canFinish(int n, vector<vector<int>>& pr)
+    {
+
+       vector<vector<int>>adjl(n);
+
+       vector<int>indegree(n,0);
+
+       queue<int>qu;
+
+       for(int i=0;i<pr.size();i++)
+       {
+
+          adjl[ pr[i][0] ].push_back( pr[i][1] );
+          indegree[pr[i][1]]++;
+
+       }
+
+       for(int i=0;i<n;i++)
+       {
+
+          if(indegree[i]==0)
+          {
+             qu.push(i);
+          }
+
+       }
+
+       while(!qu.empty())
+       {
+
+           int v=qu.front();
+
+           for(auto adjv:adjl[v])
+           {
+
+              indegree[adjv]--;
+
+              if(indegree[adjv]==0)
+              {
+                 qu.push(adjv);
+              }
+
+           }
+
+           qu.pop();
+       }
+
+       for(int i=0;i<n;i++)
+       {
+          if(indegree[i]!=0)
+          return false;
+       }
+
+       return true;
+
+    }
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

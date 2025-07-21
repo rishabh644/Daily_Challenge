@@ -1,0 +1,15 @@
+select distinct C.customer_id,C.customer_name
+from Customers as C
+where customer_id not in (select distinct customer_id from orders where product_name='C') and customer_id in (select distinct customer_id from orders where product_name='A') and customer_id in (select distinct customer_id from orders where product_name='B')
+order by C.customer_id
+
+------------------------------------
+Customers table:
++-------------+---------------+
+| customer_id | customer_name |
++-------------+---------------+
+| 1           | Daniel        |
+| 2           | Diana         |
+| 3           | Elizabeth     |
+| 4           | Jhon          |
++-------------+---------------+
